@@ -39,7 +39,7 @@ const ImageUpload = () => {
         "https://image-gullery.vercel.app/api/v1/create-gullery",
         { image, userId: userId }
       );
-      console.log("response:", response);
+      // console.log("response:", response);
       if (response) {
         alert("upload successful!");
       }
