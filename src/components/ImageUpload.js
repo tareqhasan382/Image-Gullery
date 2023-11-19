@@ -33,6 +33,7 @@ const ImageUpload = () => {
   const handleSubmit = async () => {
     let userInfo = localStorage.getItem("accessToken");
     const { userId } = jwtDecode(userInfo);
+    console.log("data:", image, userId);
     try {
       const response = await axios.post(
         "https://image-gullery.vercel.app/api/v1/create-gullery",

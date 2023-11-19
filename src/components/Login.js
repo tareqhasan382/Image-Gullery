@@ -1,10 +1,12 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ const Login = () => {
       .then(function (response) {
         const accessToken = response.data.data.accessToken;
         localStorage.setItem("accessToken", accessToken);
+        router.push("/gullery");
         console.log("response:", accessToken); // accessToken
       })
       .catch(function (error) {
