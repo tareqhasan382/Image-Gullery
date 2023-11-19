@@ -37,7 +37,7 @@ const ImageUpload = () => {
     try {
       const response = await axios.post(
         "https://image-gullery.vercel.app/api/v1/create-gullery",
-        { image, userId: userId }
+        { image, userId: "655a17d8aec4d7a9a95d2cb3" }
       );
       // console.log("response:", response);
       if (response) {
