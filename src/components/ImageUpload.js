@@ -33,7 +33,7 @@ const ImageUpload = () => {
   const handleSubmit = async () => {
     let userInfo = localStorage.getItem("accessToken");
     const { userId } = jwtDecode(userInfo);
-    console.log("data:", image, userId);
+
     try {
       const response = await axios.post(
         "https://image-gullery.vercel.app/api/v1/create-gullery",
@@ -48,6 +48,7 @@ const ImageUpload = () => {
       alert("upload failed. Please check your credentials.");
     }
   };
+  console.log("data:", image, userId);
   return (
     <div className=" items-center justify-start flex flex-row bg-white w-full p-8  -mx-3 mb-6">
       <form>
