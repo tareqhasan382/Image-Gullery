@@ -16,7 +16,9 @@ const Gullery = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/gullery");
+        const response = await fetch(
+          "https://image-gullery.vercel.app/api/v1/gullery"
+        );
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
