@@ -1,13 +1,13 @@
 "use client";
 
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
 import { useState } from "react";
 
 const ImageUpload = () => {
   //  console.log(decoded);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
   const handleImageChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       //setImage(e.target.files[0]);
@@ -31,15 +31,15 @@ const ImageUpload = () => {
   console.log("Image", image);
   //=======================
   const handleSubmit = async () => {
-    let userInfo = localStorage.getItem("accessToken");
-    const { userId } = jwtDecode(userInfo);
+    // let userInfo = localStorage.getItem("accessToken");
+    // const { userId } = jwtDecode(userInfo);
 
     try {
       const response = await axios.post(
-        "https://image-gullery.vercel.app/api/v1/create-gullery",
-        { image, userId: "655a17d8aec4d7a9a95d2cb3" }
+        "https://image-gullery.vercel.app/api/v1/api/v1/create-gullery",
+        { image: image }
       );
-      // console.log("response:", response);
+      console.log("response:", response);
       if (response) {
         alert("upload successful!");
       }
@@ -48,7 +48,7 @@ const ImageUpload = () => {
       alert("upload failed. Please check your credentials.");
     }
   };
-  console.log("data:", image, userId);
+  // console.log("data:", image, userId);
   return (
     <div className=" items-center justify-start flex flex-row bg-white w-full p-8  -mx-3 mb-6">
       <form>
