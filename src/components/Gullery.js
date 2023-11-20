@@ -34,7 +34,7 @@ const Gullery = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array means this effect runs once after the component mounts
+  }, [data]); // Empty dependency array means this effect runs once after the component mounts
 
   if (loading) {
     return <p>Loading...</p>;
@@ -43,7 +43,7 @@ const Gullery = () => {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
-  console.log("data:", data.data);
+  // console.log("data:", data.data);
   return (
     <div className=" w-full">
       <h1 className=" text-center text-3xl font-bold ">Photo Gullery</h1>

@@ -1,58 +1,52 @@
 "use client";
-
 import axios from "axios";
-// import { jwtDecode } from "jwt-decode";
-
 import { useState } from "react";
-
+import { useForm } from "react-hook-form";
 const ImageUpload = () => {
-  //  console.log(decoded);
-  const [image, setImage] = useState();
-  const handleImageChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      //setImage(e.target.files[0]);
-      const image = e.target.files[0];
-      const formData = new FormData();
-      formData.append("file", image);
-      formData.append("upload_preset", "Reservation");
-      const uploadResponse = await fetch(
-        "https://api.cloudinary.com/v1_1/dsybkyula/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const uploadedImageData = await uploadResponse.json();
-      const imageUrl = uploadedImageData.secure_url;
-      setImage(imageUrl);
-      console.log("imageUrl:", imageUrl);
-    }
-  };
-  console.log("Image", image);
-  //=======================
-  const handleSubmit = async () => {
-    // let userInfo = localStorage.getItem("accessToken");
-    // const { userId } = jwtDecode(userInfo);
+  const [isLoading, setLoading] = useState();
+  //let isLoading = false;
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (data) => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("file", data.image[0]); // assuming your input name is 'image'
+    formData.append("upload_preset", "Reservation");
 
-    try {
-      const response = await axios.post(
-        "https://image-gullery.vercel.app/api/v1/create-gullery",
-        { image: image }
-      );
-      console.log("response:", response);
-      if (response) {
-        alert("upload successful!");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("upload failed. Please check your credentials.");
+    // Make a request to Cloudinary using axios
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/dsybkyula/image/upload",
+      formData
+    );
+    const imageUrl = response.data.secure_url;
+    //==================Save url to database
+    const res = await axios.post(
+      "https://image-gullery.vercel.app/api/v1/create-gullery",
+      { image: imageUrl }
+    );
+    setLoading(false);
+    if (res?.data?.success) {
+      window.alert("Upload Successfully");
     }
+    console.log("result:", res.data.success);
   };
-  // console.log("data:", image, userId);
   return (
     <div className=" items-center justify-start flex flex-row bg-white w-full p-8  -mx-3 mb-6">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className=" w-full">
+          <label
+            className="block tracking-wide text-gray-700 mb-2"
+            htmlFor="name"
+          >
+            Name
+          </label>
+          <input
+            disabled={isLoading}
+            {...register("name", { required: true })}
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="name"
+            type="text"
+            placeholder="your name"
+          />
           <label
             className="block tracking-wide text-gray-700 text-xl font-bold mb-2"
             htmlFor="imageSrc"
@@ -60,9 +54,8 @@ const ImageUpload = () => {
             Upload Image
           </label>
           <input
-            required
-            onChange={handleImageChange}
-            // {...register("imageSrc")}
+            disabled={isLoading}
+            {...register("image", { required: true })}
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="imageSrc"
             type="file"
@@ -73,8 +66,11 @@ const ImageUpload = () => {
           </p>
         </div>
         <button
-          onClick={handleSubmit}
-          className=" px-3 py-2 bg-slate-800 text-white rounded text-xl font-bold "
+          disabled={isLoading}
+          type="submit"
+          className={`${
+            isLoading ? "opacity-30 " : ""
+          }px-3 py-2 bg-slate-800 text-white rounded text-xl font-bold `}
         >
           Submit
         </button>
@@ -84,3 +80,17 @@ const ImageUpload = () => {
 };
 
 export default ImageUpload;
+
+//  formData.append("file", image);
+//  formData.append("upload_preset", "Reservation");
+// const uploadResponse = await fetch(
+//   "https://api.cloudinary.com/v1_1/dsybkyula/image/upload",
+//   {
+//     method: "POST",
+//     body: formData,
+//   }
+// );
+// const uploadedImageData = await uploadResponse.json();
+// const imageUrl = uploadedImageData.secure_url;
+//  setImage(imageUrl);
+// console.log("imageUrl:", imageUrl);
