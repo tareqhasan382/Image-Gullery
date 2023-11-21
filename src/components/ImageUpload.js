@@ -22,7 +22,7 @@ const ImageUpload = () => {
     const imageUrl = response.data.secure_url;
     //==================Save url to database
     const res = await axios.post(
-      "http://localhost:8000/api/v1/create-gullery",
+      "https://image-gullery.vercel.app/api/v1/create-gullery",
       { image: imageUrl }
     );
     setLoading(false);
