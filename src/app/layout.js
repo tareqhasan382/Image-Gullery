@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={font.className}>
-        <div className="fixed top-0 w-screen ">
+        <div className="fixed top-0 w-screen z-50 ">
           <ClientOnly>
             <Navbar />
           </ClientOnly>

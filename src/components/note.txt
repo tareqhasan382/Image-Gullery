@@ -1,0 +1,92 @@
+ const handleImageChange = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      console.log("file:", file);
+    
+    }
+  };
+  
+  console.log("setImage:", image);
+  //=======================
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // let userInfo = localStorage.getItem("accessToken");
+    // const { userId } = jwtDecode(userInfo);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/create-gullery",
+        { image: image }
+      );
+      //console.log("response:", response);
+      if (response) {
+        alert("upload successful!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("upload failed. Please check your credentials.");
+    }
+  };
+
+
+
+=========================================================
+0
+: 
+{_id: '655a17d8aec4d7a9a95d2cb3', userId: '6559aac5e0706aefb1e8ccf7', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700403156/Reservation/qitr5bnrzvdhf9jy1veo.jpg', createdAt: '2023-11-19T14:12:40.602Z', updatedAt: '2023-11-19T14:12:40.602Z', …}
+1
+: 
+{_id: '655a18d2aec4d7a9a95d2cbd', userId: '6559aac5e0706aefb1e8ccf7', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700403400/Reservation/okyhru2tmcxvktrxj8do.jpg', createdAt: '2023-11-19T14:16:50.305Z', updatedAt: '2023-11-19T14:16:50.305Z', …}
+2
+: 
+{_id: '655a19a2aec4d7a9a95d2ccd', userId: '6559aac5e0706aefb1e8ccf7', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700403597/Reservation/sfw8aga3uclwklb9d48t.jpg', createdAt: '2023-11-19T14:20:18.902Z', updatedAt: '2023-11-19T14:20:18.902Z', …}
+3
+: 
+{_id: '655a528dc42b06077900152b', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700418164/Reservation/vpjwkpcgwsone7pe2skb.jpg', createdAt: '2023-11-19T18:23:09.219Z', updatedAt: '2023-11-19T18:23:09.219Z', __v: 0}
+4
+: 
+{_id: '655a563321479af56aa37f4f', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700419088/Reservation/w11mrzgn9pbtcfcauszr.jpg', createdAt: '2023-11-19T18:38:43.605Z', updatedAt: '2023-11-19T18:38:43.605Z', __v: 0}
+5
+: 
+{_id: '655a58e421479af56aa37f61', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700419800/Reservation/pgnkgcysdqwgfrlg6fht.jpg', createdAt: '2023-11-19T18:50:12.688Z', updatedAt: '2023-11-19T18:50:12.688Z', __v: 0}
+6
+: 
+{_id: '655bcf18ced3df29d74975af', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700515608/Reservation/vyavzrl8xkuhexyqoudy.jpg', createdAt: '2023-11-20T21:26:48.486Z', updatedAt: '2023-11-20T21:26:48.486Z', __v: 0}
+7
+: 
+{_id: '655bd0aeced3df29d74975b1', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700516014/Reservation/iugxruukddfxs8cc1f0v.jpg', createdAt: '2023-11-20T21:33:34.741Z', updatedAt: '2023-11-20T21:33:34.741Z', __v: 0}
+8
+: 
+{_id: '655bd0d6ced3df29d74975b3', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700516053/Reservation/xa17tcej7jffivsrm5h2.jpg', createdAt: '2023-11-20T21:34:14.129Z', updatedAt: '2023-11-20T21:34:14.129Z', __v: 0}
+9
+: 
+{_id: '655bd2f1ced3df29d74975b5', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700516593/Reservation/viesqqillod3mvcoqxhs.jpg', createdAt: '2023-11-20T21:43:13.729Z', updatedAt: '2023-11-20T21:43:13.729Z', __v: 0}
+10
+: 
+{_id: '655bd438ced3df29d74975b7', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700516919/Reservation/edbjtee9kq3xznjtbzzt.jpg', createdAt: '2023-11-20T21:48:40.141Z', updatedAt: '2023-11-20T21:48:40.141Z', __v: 0}
+11
+: 
+{_id: '655bd482ced3df29d74975b9', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700516994/Reservation/flfrjxprhzdjzcxvikox.jpg', createdAt: '2023-11-20T21:49:54.429Z', updatedAt: '2023-11-20T21:49:54.429Z', __v: 0}
+12
+: 
+{_id: '655bd4d0ced3df29d74975bb', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700517072/Reservation/wr3vfnopzezokuvz4vo4.jpg', createdAt: '2023-11-20T21:51:12.797Z', updatedAt: '2023-11-20T21:51:12.797Z', __v: 0}
+13
+: 
+{_id: '655bd65a2788d79ad3a27825', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700517464/Reservation/wvhoa2eenpz2cw0abbmw.jpg', createdAt: '2023-11-20T21:57:46.046Z', updatedAt: '2023-11-20T21:57:46.046Z', __v: 0}
+14
+: 
+{_id: '655bd66e73bb339370098872', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700517484/Reservation/pahcfsnoucu6ltnnt95v.jpg', createdAt: '2023-11-20T21:58:06.334Z', updatedAt: '2023-11-20T21:58:06.334Z', __v: 0}
+15
+: 
+{_id: '655bd7e42788d79ad3a27970', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700517859/Reservation/qcl2cpih7wjph5eshz7d.png', createdAt: '2023-11-20T22:04:20.997Z', updatedAt: '2023-11-20T22:04:20.997Z', __v: 0}
+16
+: 
+{_id: '655c4b376ac6e84ec8a9b287', image: 'https://res.cloudinary.com/dsybkyula/image/upload/v1700547382/Reservation/sonb7xdvumlwegmmseol.jpg', createdAt: '2023-11-21T06:16:23.950Z', updatedAt: '2023-11-21T06:16:23.950Z', __v: 0}
+length
+: 
+17
+
+
+
+
+

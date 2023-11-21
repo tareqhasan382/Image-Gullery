@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
+import { Hourglass } from "react-loader-spinner";
 const Gullery = () => {
   // gullery
   //   let userInfo = await localStorage.getItem("accessToken");
@@ -34,37 +34,61 @@ const Gullery = () => {
     };
 
     fetchData();
-  }, [data]); // Empty dependency array means this effect runs once after the component mounts
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  }, []); // Empty dependency array means this effect runs once after the component mounts
 
   if (error) {
     return <p>Error: {error.message}</p>;
   }
-  // console.log("data:", data.data);
   return (
     <div className=" w-full">
-      <h1 className=" text-center text-3xl font-bold ">Photo Gullery</h1>
-      <div className="flex flex-wrap items-center justify-center py-10 gap-5">
-        {data?.data.map((item) => (
-          <div key={item._id}>
-            <div>
-              <Image
-                src={item.image}
-                alt="Image 1"
-                height={64}
-                width={64}
-                className="w-full h-64 object-cover rounded-md"
-              />
-            </div>
-          </div>
-        ))}
+      <div className=" flex flex-col items-center ">
+        <h1 className=" text-center text-5xl font-bold leading-tight text-green-500 font-serif ">
+          Photos Gallery
+        </h1>
+        <hr className="border-t border-black text-center w-60 " />
       </div>
+      {loading ? (
+        <div className=" py-5 text-center flex items-center justify-center ">
+          <Hourglass
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="hourglass-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            colors={["#306cce", "#72a1ed"]}
+          />
+        </div>
+      ) : (
+        <div className="flex flex-wrap items-center justify-center py-10 gap-5">
+          {data?.data.map((item) => (
+            <div key={item._id}>
+              <div>
+                <Image
+                  src={item.image}
+                  alt="Image 1"
+                  height={400}
+                  width={400}
+                  className=" h-64 object-cover rounded-md"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default Gullery;
-//
+/*
+<Audio
+    height = "80"
+    width = "80"
+    radius = "9"
+    color = 'green'
+    ariaLabel = 'three-dots-loading'     
+    wrapperStyle
+    wrapperClass
+  />
+*/

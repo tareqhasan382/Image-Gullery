@@ -24,8 +24,8 @@ const Navbar = () => {
       <nav className=" w-full h-16 shadow-xl bg-slate-200 ">
         {/*======================================== Dekstop menu ============================================*/}
         <div className=" lg:px-48 md:px-20  w-full flex items-center justify-between h-full px-10 ">
-          <Link href="/gullery">
-            <h1 className=" font-bold text-2xl ">Gullery</h1>
+          <Link href="/">
+            <h1 className=" font-bold text-3xl font-serif text-green-500 leading-tight ">Gallery</h1>
             
           </Link>
           <div className=" text-black hidden sm:flex  ">

@@ -2,6 +2,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FallingLines } from "react-loader-spinner";
+//FallingLines
 const ImageUpload = () => {
   const [isLoading, setLoading] = useState();
   //let isLoading = false;
@@ -20,7 +22,7 @@ const ImageUpload = () => {
     const imageUrl = response.data.secure_url;
     //==================Save url to database
     const res = await axios.post(
-      "https://image-gullery.vercel.app/api/v1/create-gullery",
+      "http://localhost:8000/api/v1/create-gullery",
       { image: imageUrl }
     );
     setLoading(false);
@@ -30,7 +32,7 @@ const ImageUpload = () => {
     console.log("result:", res.data.success);
   };
   return (
-    <div className=" items-center justify-start flex flex-row bg-white w-full p-8  -mx-3 mb-6">
+    <div className=" relative items-center justify-start flex flex-row bg-white w-full p-8  -mx-3 mb-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=" w-full">
           <label
@@ -75,6 +77,16 @@ const ImageUpload = () => {
           Submit
         </button>
       </form>
+      {isLoading && (
+        <div className=" z-10 absolute items-center justify-center px-10 h-20 w-auto ">
+          <FallingLines
+            color="#4fa94d"
+            width="100"
+            visible={true}
+            ariaLabel="falling-lines-loading"
+          />
+        </div>
+      )}
     </div>
   );
 };
