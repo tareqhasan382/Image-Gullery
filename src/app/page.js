@@ -7,7 +7,7 @@ export default function Home() {
     <main className="lg:px-48 md:px-20 flex flex-col  w-full items-center justify-between px-10 mt-32 ">
       <Hero />
       <div className=" pb-10 flex flex-col items-center pt-10 ">
-        <h1 className=" text-5xl font-bold leading-tight font-sans ">
+        <h1 className=" lg:text-5xl text-3xl font-bold leading-tight font-sans ">
           <span className=" text-green-500 font-serif ">Photos Gallery</span>
         </h1>
         <hr className="border-t border-black text-center w-60 " />

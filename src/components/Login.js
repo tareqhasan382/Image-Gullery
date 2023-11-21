@@ -2,10 +2,11 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const [error, setError] = useState(null);
   const router = useRouter();
   const {
     register,
@@ -14,42 +15,25 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
-    axios
-      .post("https://image-gullery.vercel.app/api/v1/login", data)
-      .then(function (response) {
-        const accessToken = response.data.data.accessToken;
-        localStorage.setItem("accessToken", accessToken);
-        router.push("/gullery");
-        console.log("response:", accessToken); // accessToken
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-
-    //const res = await userLogin({ ...data }).unwrap();
-
-    // if (res?.accessToken) {
-    //   storeUserInfo({ token: res.accessToken });
-    //   router.refresh();
-    //   router.push("/");
-    // } else {
-    //   toast.error("loggedIn Field", {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // }
+    //console.log(data);
+    const response = await axios.post(
+      "https://image-gullery.vercel.app/api/v1/login",
+      data
+    );
+    if (response?.data?.data?.accessToken) {
+      window.alert("User loggedin successfully");
+      localStorage.setItem("accessToken", response?.data?.data?.accessToken);
+      // storeUserInfo({ token: response?.data?.data?.accessToken });
+      router.push("/");
+    } else {
+      setError(response?.data?.message);
+      // console.log(response.data.message);
+    }
   };
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mb-14 ">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6  lg:px-8 mb-14 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* <Image
-          width={200}
-          height={200}
-          className="mx-auto h-10 w-auto"
-          src="/images/logo.png"
-          alt="Your Company"
-        /> */}
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center  text-3xl font-bold font-sans leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
       </div>
@@ -109,14 +93,15 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
             </button>
+            {error && <p className=" text-red-500 ">{error} </p>}
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-3 text-center text-sm text-gray-500">
           Not a member?{" "}
           <Link
             href="/register"

@@ -42,7 +42,7 @@ const Gullery = () => {
   return (
     <div className=" w-full">
       <div className=" flex flex-col items-center ">
-        <h1 className=" text-center text-5xl font-bold leading-tight text-green-500 font-serif ">
+        <h1 className=" text-center lg:text-5xl text-3xl font-bold leading-tight text-green-500 font-serif ">
           Photos Gallery
         </h1>
         <hr className="border-t border-black text-center w-60 " />

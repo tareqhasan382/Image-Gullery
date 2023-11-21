@@ -7,7 +7,7 @@ import { FallingLines } from "react-loader-spinner";
 const ImageUpload = () => {
   const [isLoading, setLoading] = useState();
   //let isLoading = false;
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
     setLoading(true);
     const formData = new FormData();
@@ -27,7 +27,8 @@ const ImageUpload = () => {
     );
     setLoading(false);
     if (res?.data?.success) {
-      window.alert("Upload Successfully");
+      reset();
+      window.alert("Image Upload Successfully");
     }
     console.log("result:", res.data.success);
   };
@@ -50,7 +51,7 @@ const ImageUpload = () => {
             placeholder="your name"
           />
           <label
-            className="block tracking-wide text-gray-700 text-xl font-bold mb-2"
+            className="block tracking-wide text-gray-700 mb-2"
             htmlFor="imageSrc"
           >
             Upload Image
@@ -72,7 +73,7 @@ const ImageUpload = () => {
           type="submit"
           className={`${
             isLoading ? "opacity-30 " : ""
-          }px-3 py-2 bg-slate-800 text-white rounded text-xl font-bold `}
+          }px-3 py-2 bg-black hover:bg-gray-800 text-white rounded text-xl font-bold `}
         >
           Submit
         </button>

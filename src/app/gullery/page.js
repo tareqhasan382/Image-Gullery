@@ -5,8 +5,8 @@ import ImageUpload from "@/components/ImageUpload";
 const GulleryPage = () => {
   return (
     <div className=" mt-24 flex flex-col  items-center justify-center ">
-      <div className=" pb-10 ">
-        <h1 className=" text-5xl font-bold leading-tight font-sans ">
+      <div className=" pb-10 flex items-center justify-center ">
+        <h1 className=" lg:text-5xl text-3xl font-bold  font-sans text-center leading-tight ">
           Welcome with{" "}
           <span className=" text-green-500 font-serif ">Photos Gallery</span>
         </h1>
