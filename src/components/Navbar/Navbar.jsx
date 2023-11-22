@@ -1,31 +1,53 @@
 "use client";
+import { getUserInfo, isLoggedIn, removeUserInfo } from "@/utils/auth";
 import Link from "next/link";
-
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Hourglass } from "react-loader-spinner";
+import React, { useEffect, useState } from "react";
 import { BsXLg, BsList, BsGithub } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import { authKey } from "@/utils/authKey";
 const styles = {
   navlink:
     " cursor-pointer ml-10 uppercase border-b border-black hover:border-red-300 text-xl ",
 };
 
 const Navbar = () => {
-  
+ // console.log("isLoggedIn:",isLoggedIn());
+  const router = useRouter();
+  const userLoggedIn = isLoggedIn();
+  const [loading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!userLoggedIn) {
+      router.push("/login");
+    }
+    setIsLoading(true);
+  }, [router, loading, userLoggedIn]);
+
+  if (!loading) {
+    <div className=" py-5 text-center flex items-center justify-center ">
+          <Hourglass
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="hourglass-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            colors={["#306cce", "#72a1ed"]}
+          />
+        </div>
+  }
+  //=============================
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMeno = () => setMenuOpen(!menuOpen);
-//   const logout = () => {
-//     // removeUserInfo(authKey);
-//     router.refresh();
-//     router.push("/login");
-//     setMenuOpen(false);
-//   };
   return (
     <header className="  ">
       <nav className=" w-full h-16 shadow-xl bg-slate-200 ">
         {/*======================================== Dekstop menu ============================================*/}
         <div className=" lg:px-48 md:px-20  w-full flex items-center justify-between h-full px-10 ">
           <Link href="/">
-            <h1 className=" font-bold text-3xl font-serif text-green-500 leading-tight ">Gallery</h1>
+            <h1 className=" font-bold text-3xl font-serif text-green-500 leading-tight ease-in-out duration-500 ">Gallery</h1>
             
           </Link>
           <div className=" text-black hidden sm:flex  ">
@@ -34,12 +56,24 @@ const Navbar = () => {
               <li className={styles.navlink}>
                 <Link href="/gullery">Gullery</Link>
               </li>
-              <li className={styles.navlink}>
-                <Link href="/login">
+              {
+                userLoggedIn? <>
+                
+              <li onClick={()=>removeUserInfo(authKey)} className=" ml-10 text-lg ">
+                <Link href="/">
                   {/* <BsCartCheckFill size={24} /> */}
-                  <p>Login</p>
+                  <p className=" px-5 py-1  text-white  rounded-full bg-black hover:bg-red-800 text-center ">Log out</p>
                 </Link>
               </li>
+                </> :<>
+                <li className={styles.navlink}>
+                <Link href="/login">
+                  {/* <BsCartCheckFill size={24} /> */}
+                  <p>Log in</p>
+                </Link>
+              </li>
+              </>
+              }
               
             </ul>
           </div>

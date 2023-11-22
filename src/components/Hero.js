@@ -6,16 +6,17 @@ const Hero = () => {
     <div className="  w-full flex flex-col lg:flex-row justify-between  items-center mb-24 mt-10 gap-10 ">
       <div className=" lg:w-2/4  ">
         <h2 className=" lg:text-5xl  text-3xl font-bold font-sans pb-8 ">
-          Discover the Best{" "}
-          <span className=" text-green-500 ">Destinations</span>
+          Unlock Precious the Best
+          <span className=" text-green-500 "> Memories</span>
         </h2>
 
         <p className=" text-xl text-justify ">
-          Your dream vacation awaits, and we`re here to make it a reality.We are
-          ready to provide you with the best trip of your life!
+          Unlock Precious Memories Safely Store and Cherish Your Photos in a
+          Secure Gallery Exclusively Yours with Unique UserID Access! 📸✨
+          #MemoriesMatter #SecureGallery #PhotoStorage!
         </p>
         <button className=" px-4 py-3  text-white w-44 rounded-full bg-black hover:bg-gray-800 mt-5 items-center justify-center ">
-          Destinations
+          Memories
         </button>
       </div>
       <div className=" lg:pl-8 w-full lg:w-2/4 items-center  ">

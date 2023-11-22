@@ -3,19 +3,17 @@ import { getFromLocalStorage, setToLocalStorage } from "./local-storage";
 // import { getBaseUrl } from "@/helpers/config/envConfig";
 // import { decodedToken } from "./jwt";
 import { authKey } from "./authKey";
-import { decodedToken } from "./jwt";
 import { jwtDecode } from "jwt-decode";
-
 export const storeUserInfo = (token) => {
   // console.log("AccessToken:", token);
   // localStorage.setItem(authKey, token);
   return setToLocalStorage(authKey, token);
 };
 export const getUserInfo = () => {
-  const authToken = localStorage.getItem("accessToken");
-  // console.log(authToken);
+  const authToken = getFromLocalStorage(authKey);
+  //console.log(authToken);
   if (authToken) {
-    const decodedData = decodedToken(authToken);
+    const decodedData = jwtDecode(authToken);
     return decodedData;
   } else {
     return "";
@@ -23,8 +21,7 @@ export const getUserInfo = () => {
 };
 
 export const isLoggedIn = () => {
-  const LoggedIn = localStorage.getItem("accessToken");
-  const authToken = jwtDecode(LoggedIn);
+  const authToken = getFromLocalStorage(authKey);
   return !!authToken;
 };
 

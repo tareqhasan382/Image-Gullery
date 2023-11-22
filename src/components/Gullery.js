@@ -1,13 +1,14 @@
 "use client";
 
+import { getUserInfo } from "@/utils/auth";
+import { authKey } from "@/utils/authKey";
 import Image from "next/image";
+import { lazy } from "react";
 import { useEffect, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
 const Gullery = () => {
-  // gullery
-  //   let userInfo = await localStorage.getItem("accessToken");
-  //   const { userId } = jwtDecode(userInfo);
   //==================== http://localhost:8000/api/v1/gullery
+  const userInfo = getUserInfo(authKey);
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ const Gullery = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://image-gullery.vercel.app/api/v1/gullery"
+          `https://image-gullery.vercel.app/api/v1/my-gallery/${userInfo.userId}`
         );
 
         if (!response.ok) {
@@ -35,7 +36,6 @@ const Gullery = () => {
 
     fetchData();
   }, []); // Empty dependency array means this effect runs once after the component mounts
-
   if (error) {
     return <p>Error: {error.message}</p>;
   }
@@ -66,9 +66,10 @@ const Gullery = () => {
               <div>
                 <Image
                   src={item.image}
-                  alt="Image 1"
-                  height={400}
-                  width={400}
+                  loading="lazy"
+                  alt="Image"
+                  height={200}
+                  width={200}
                   className=" h-64 object-cover rounded-md"
                 />
               </div>

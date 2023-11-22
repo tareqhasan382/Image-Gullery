@@ -19,8 +19,8 @@ const HomePage = () => {
         }
 
         const result = await response.json();
-        setImages(result?.data);
-        console.log(result?.data);
+        setImages(result?.data.slice(0, 6));
+        // console.log(result?.data); // (data.slice(0, 6))
       } catch (error) {
         console.log(error);
         setError(error);
@@ -45,6 +45,7 @@ const HomePage = () => {
     setSelectedImage(null);
   };
   // flex items-center justify-center
+  console.log(images);
   return (
     <>
       {loading ? (

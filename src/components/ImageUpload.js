@@ -1,12 +1,15 @@
 "use client";
+import { getUserInfo } from "@/utils/auth";
+import { authKey } from "@/utils/authKey";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FallingLines } from "react-loader-spinner";
 //FallingLines
 const ImageUpload = () => {
+  const userinfo = getUserInfo(authKey);
+  console.log("userinfo:", userinfo?.userId);
   const [isLoading, setLoading] = useState();
-  //let isLoading = false;
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
     setLoading(true);
@@ -23,7 +26,7 @@ const ImageUpload = () => {
     //==================Save url to database
     const res = await axios.post(
       "https://image-gullery.vercel.app/api/v1/create-gullery",
-      { image: imageUrl }
+      { image: imageUrl, userId: userinfo?.userId }
     );
     setLoading(false);
     if (res?.data?.success) {
